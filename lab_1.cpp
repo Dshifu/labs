@@ -6,7 +6,7 @@
 using namespace std;
 
 void Encr_Gamm2(unsigned char *M, unsigned char *K,int LenM, int LenK, unsigned char *C);
-void showHexText(unsigned char *text, int textlen);
+void ShowHexText(unsigned char *text, int textlen);
 void Gen_Key_G2(unsigned char *K, int lenK);
 bool testMonobit(unsigned char *K, int lenK);
 bool testBlock(unsigned char *K, int lenK);
@@ -21,7 +21,7 @@ void Encr_Gamm2(unsigned char *M, unsigned char *K,int LenM, int LenK, unsigned 
 }
 
 //Function for hex
-void showHexText(unsigned char *text, int textlen)
+void ShowHexText(unsigned char *text, int textlen)
 {
 	for (int i=0; i<textlen-1; i++)
 		cout<<hex<<(int)text[i];
@@ -39,6 +39,7 @@ void Gen_Key_G2(unsigned char *K, int lenK)
 		attemptions++;
 	}
 	while (!(testMonobit(K,LenK)&&
+			 testBlock(K,lenK)&&
 			 testSeries(K,lenK)&&
 			 testMaxSequence(K,LenK)));
 	count << "Attemptions: " << attemptions<<"\n\n";
