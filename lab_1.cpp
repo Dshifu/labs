@@ -150,6 +150,75 @@ bool testMaxSequence(unsigned char *K, int lenK)
 	unsigned char temp =0, past_temp=K[0]&0x80;
 	past_temp=past_temp>>7;
 	int now_ser_1=0, now_ser_0=0, best_seq_1=0;
-	for ()
+	for (int i=0; i<lenK; i++)
+	{
+		for (int j=0; j<8; j++)
+		{
+			temp=K[i]&mask[j];
+			temp=temp>>7-j;
+			if(temp==1)
+				now_ser_1++;
+			else
+				now_ser_0++;
+			if(past_temp != temp)
+			{
+				if(past_temp==1)
+				{
+					if(best_seq_1<now_ser_1)
+						best_seq_1=now_ser_1;
+					now_ser_1=0;
+				}
+				else
+				{
+					if(best_seq_0<now_ser_0)
+						best_seq_0=now_ser_0;
+					now_ser_0=0;
+				}
+			}
+			past_temp=temp;
+		}
+	}
+	if (best_seq_1<26 && best_seq_0<26)
+		return true;
+	else
+		return false;
 }
-//aboooom
+
+int main()
+{
+	stand(time(NULL));
+	const int lenK=2500;
+	unsigned char K[lenK]={0};
+	count<<"FIBS 140-2"<<endl;
+	
+	Gen_Key_G2(K,lenK);
+	count<<"Key: \n";
+	
+	ShowHexText(K,LenK);
+	unsigned char M[]="Speakers must speak";
+	int lenM=sizeof(M);
+	unsigned char *C=new unsigned char[lenM];
+	
+	Encr_Gamm2(M,K,LenM,LenK,C);
+	cout<<"\n what u mean: \n";
+	cout<<M<<endl;
+	cout<<"\n What we mean(hex): \n";
+	
+	ShowHexText(C,lenM);
+	cout<<"\n\n\n";
+	unsigned char *M1=new unsigned char[lenM];
+	
+	Encr_Gamm2(C,K,LenM,LenK,M1);
+	cout<<"\n first text: \n";
+	cout<<M1<<endl;
+	cout<<"\n first text in hex: \n";
+	
+	ShowHexText(M1, lenM);
+	bool is_match=true;
+	for(int i=0; i<lenM; i++)
+		if (M1[i] != M[i])
+			is_match=false
+	cout<<"\n information match: " << boolalpha<< is_match<<endl;
+	system("pause");
+	return 0;
+}
