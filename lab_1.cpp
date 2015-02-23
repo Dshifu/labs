@@ -152,3 +152,4 @@ bool testMaxSequence(unsigned char *K, int lenK)
 	int now_ser_1=0, now_ser_0=0, best_seq_1=0;
 	for ()
 }
+//aboooom
